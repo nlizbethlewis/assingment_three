@@ -1,91 +1,103 @@
-var balance;
-var checks;
-var overdraft;
-var atm;
-var orders;
-var bills;
-var domestic;
-var international;
-var output;
+
+
+
+var corpChecks=20;
+var corpOverdraft=35;
+var corpAtm=33;
+var corpOrders=5;
+var corpDomestic=30;
+var corpInternational=45;
+var corpMonthly=147;
+
+var commChecks=20;
+var commOverdraft=32.50;
+var commAtm=16.5;
+var commOrders=6.67;
+var commDomestic=29.50;
+var commInternational=37.50;
+
+var creditChecks=20;
+var creditOverdraft=26;
+var creditAtm=18;
+var creditOrders=1.5;
+var creditBills=1; 
+var creditDomestic=25;
+var creditInternational=48.30;
+var creditMonthly=60;
+
+var balance = document.getElementById("balance").value;
+var checks = document.getElementById("checks").value;
+var overdraft = document.getElementById("overdraft").value;
+var atm = document.getElementById("atm").value;
+var orders = document.getElementById("orders").value;
+var bills = document.getElementById("bills").value;
+var domestic = document.getElementById("domestic").value;
+var international = document.getElementById("international").value;
+// var output = operationCorp(checks, overdraft, atm, orders, domestic, international);
 
 
 function corpCalc(){
-	var corporate = (parseFloat(checks) * 20) + (parseFloat(overdraft) * 35) + (parseFloat(atm) * 2.75 * 12) 
-	+ (parseFloat(orders) * 5) + (parseFloat(domestic) * 30) + (parseFloat(international) * 45) + (12.25 * 12),
-	string = "It would cost you approximately $" + corporate + " per year to bank at a national bank, like Citibank or Chase.";
-	return string;
-	console.log(string);
+var corporate = (checks * corpChecks)
+              + (overdraft * corpOverdraft) 
+		      + (atm * corpAtm) 
+			  + (orders * corpOrders) 
+			  + (domestic * corpDomestic) 
+			  + (international * corpInternational) 
+			  + (corpMonthly),
+			corpString="It would cost you approximately $" + corporate + " per year to bank at a national bank, like Citibank or Chase.";
+			return corpString;
+			console.log(corpString);
 }
 
+
 function commCalc(){
-	var community = (parseFloat(checks) * 20) + (parseFloat(overdraft) * 32.50) + (parseFloat(atm) * 1.375 * 12) 
-	+ (parseFloat(orders) * 6.67) + (parseFloat(domestic) * 29.50) + (parseFloat(international) * 37.50),
-	string = "It would cost you approximately $" + community + " per year to bank at a community bank, like Astoria or Almagamated.";
-	return string;
-	console.log(string);
+var community = (checks * commChecks)
+              + (overdraft * commOverdraft) 
+		      + (atm * commAtm) 
+			  + (orders * commOrders) 
+			  + (domestic * commDomestic) 
+			  + (international * commInternational),
+			 commString = "It would cost you approximately $" + community + " per year to bank at a community bank, like Astoria or Almagamated.";
+			 return commString;
+			
 }
 
 function creditunionCalc(){
-	var creditunion = (parseFloat(checks) * 20) + (parseFloat(overdraft) * 26) + (parseFloat(atm) * 1.50 * 12) 
-	+ (parseFloat(orders) * 1.5) + (parseFloat(bills) * 1) + (parseFloat(domestic) * 25) + (parseFloat(international) * 48.30) + (5 * 12),
-	string = "It would cost you approximately $" + creditunion + " per year to bank at a credit union, like the Lower East Side People's Credit Union or Qside in Queens.";
-	return string;
-	console.log(string);
+var creditunion = (checks * creditChecks)
+              + (overdraft * creditOverdraft) 
+		      + (atm * creditAtm) 
+			  + (orders * creditOrders) 
+			  + (domestic * creditDomestic) 
+			  + (international * creditInternational)
+			  + (creditMonthly),
+			creditString = "It would cost you approximately $" + creditunion + " per year to bank at a credit union, like the Lower East Side People's Credit Union or Qside in Queens.";
+			return creditString;
 }
 
-function populatehtml(operationCorp){
-	// corpCalc();
-	// commCalc();
-	 balance = document.getElementById("balance").value;
-	 console.log(balance)
-	 checks = document.getElementById("checks").value;
-	 overdraft = document.getElementById("overdraft").value;
-	 atm = document.getElementById("atm").value;
-	 orders = document.getElementById("orders").value;
-	 bills = document.getElementById("bills").value;
-	 domestic = document.getElementById("domestic").value;
-	 international = document.getElementById("international").value;
-	 output = operationCorp(checks, overdraft, atm, orders, domestic, international);
-	 
-	 // console.log(output);
-	 // corpCalc();
-	 // commCalc();
-	  	document.getElementById("corporate").innerText = output;
 
-// We couldn't figure out how to get the three unique outputs to run.
-	 	
-// console.log(output)
 
-	// document.getElementById("results").innerText += output;
-	// console.log(orders);
 
-	if (balance >= "$1,500"){
-		document.getElementById("result").innerHTML = "Based on your inputs and monthly minimum requirements, you might benefit from banking at a national institution.";
-	}
-    else {
-    	document.getElementById("result").innerHTML = "Based on your inputs and monthly minimum requirements, you might benefit from banking at a community or credit union institution.";
-	    }
-	    console.log(result)
+function allFunctions(){
+	corpCalc();
+	creditunionCalc();
+	commCalc();
+		
 }
-// Our if/then statement isn't working properly either, and regardless of the amount entered, it returns a 'national' bank result.
 
 
-// The function to run all functions below returns an "undefined" result.
+document.getElementById("calculate").onclick = allFunctions();
+document.getElementById("corporate").innerText = corpCalc();
+document.getElementById("community").innerText= commCalc();
+document.getElementById("creditunion").innerText = creditunionCalc();
 
-// function allFunctions(){
-// 	corpCalc();
-// 	commCalc();
-// 	// creditunionCalc();
-// 	console.log(allFunctions);
+
+
+// function reset(){
+//     document.getElementById("resetForm").reset();
 // }
 
-document.getElementById("calculate").onclick = function(){populatehtml(corpCalc)};
-
-// document.getElementById("calculate").onclick = function(){populatehtml(allFunctions)};
 
 
-// document.getElementById("calculate").onclick = function(){populatehtml(corpCalc);(commCalc)};
-// document.getElementById("calculate").onclick = function(){populatehtml(commCalc)};
 
 
 
